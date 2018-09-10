@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block title %}
+  ELAgeo | Contact Us
+{% endblock %}
+
+{% block body %}
+<br><br>
+<div id="blue">
+		<div class="container">
+			<div class="row centered">
+				<div class="col-lg-8 col-lg-offset-2">
+				<h4>Drop Us a Message</h4>
+				{# <p>JUST TAKE A LOOK & CONTACT US</p> #}
+				</div>
+			</div><!-- row -->
+		</div><!-- container -->
+	</div><!-- blue wrap -->
+
+  <br>
+<div class="container">
+
+
+<div class=" col-md-6">
+  <form class="" action="." method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+    <div class="form-group">
+      <input class="btn btn-primary"  type="submit" name="" value="  Send  ">
+    </div>
+
+  </form>
+</div>
+
+
+<div class="col-md-6 contact-info text">
+<table>
+  <tr>
+
+    <td><h3> <b>Email:</b> info@elageo.online </h3></td>
+  </tr>
+  <tr>
+    <td> <h3> <b> Phone:</b> 0552723018 / 0506103877 / 0503361449</h3> </td>
+  </tr>
+
+  <tr><td> <h3> <b>Address:</b>Elageo Ltd</h3>
+    <tr><td> <h3> P.O Box KN 4652,</h3></td></tr>
+    <tr><td> <h3> Kaneshie, Accra</h3>
+    </td>
+  </tr>
+
+
+
+  <tr>
+    <td><h3> <em> www.elage.com</em></h3>
+    </td>
+  </tr>
+
+
+</table>
+</div>
+</div>
+
+
+<div class="map">
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7941.743949009061!2d-0.24525507644813346!3d5.585934133800838!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xfdf9995ab1f5e71%3A0xf0f079fb0ac004e2!2sNorth+Kaneshi%2C+Accra!5e0!3m2!1sen!2sgh!4v1533936133040" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+</div>
+
+
+
+{% endblock %}

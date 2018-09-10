@@ -1,0 +1,38 @@
+
+<nav aria-label="Page navigation">
+  <ul class="pager">
+    {% if page.has_previous %}
+    <li class='active'>
+      <a  href="?page={{ page.previous_page_number }}" aria-label="Previous">
+        <span aria-hidden="true"></span>Prev
+      </a></li>
+        {% else %}
+        <li class='disabled'>
+          <a  href="#" aria-label="Previous">
+        <span aria-hidden="true"></span>Prev
+      </a>
+    </li>
+    {% endif %}
+    <!--<li></li>
+    <li></li>
+    <li><a href="#">3</a></li>
+    <li><a href="#">4</a></li>-->
+    <li><a href="#">Page {{ page.number }} of {{ page.paginator.num_pages }}</a></li>
+
+
+
+
+    {% if page.has_next %}
+    <li class='active'>
+
+      <a href="?page={{ page.next_page_number }}" aria-label="Next">
+        <span aria-hidden="true"></span>Next
+      </a>next</li>
+      {% else %}
+      <li class='disabled'>
+        <a href="#" aria-label="Next">
+          <span aria-hidden="true"></span>Next
+        </a></li>
+        {%endif%}
+  </ul>
+</nav>

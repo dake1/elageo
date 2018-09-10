@@ -1,0 +1,121 @@
+{# {% extends "base.html" %}
+{% load static %}
+{% block title %}
+    Elageo | Sales Detail
+{% endblock %}
+
+{% block body %}
+<br><br><br>
+
+<div class="container">
+<div id="detail_slider" >
+
+
+<div class="slider">
+  <div id="about-slider">
+    <div id="carousel-slider" class="carousel slide" data-ride="carousel">
+      <!-- Indicators -->
+      <ol class="carousel-indicators visible-xs">
+        {% for i in num %}
+         <li data-target="#carousel-slider" data-slide-to='{{ i }}' class="active"></li>
+        <!-- <li data-target="#carousel-slider" data-slide-to="1"></li>
+        <li data-target="#carousel-slider" data-slide-to="2"></li> -->
+      {% endfor %}
+      </ol>
+
+{% for image in prop.pictures.all|slice:"0:1"  %}
+      <div class="carousel-inner">
+        <div class="item active">
+          <img src='{{image.image.url}}' class="img-responsive img-w" alt="">
+      </div>
+          {% endfor %}
+          {% for image in prop.pictures.all|slice:"1:"  %}
+      <div class="item">
+        <img src='{{image.image.url}}' class="img-responsive img-w" alt="">
+      </div>
+{% endfor %}
+        </div>
+
+
+
+<a class="left carousel-control hidden-xs" href="#carousel-slider" data-slide="prev">
+  <i class="fa fa-angle-left"></i>
+</a>
+
+<a class=" right carousel-control hidden-xs"href="#carousel-slider" data-slide="next">
+  <i class="fa fa-angle-right"></i>
+</a>
+</div> <!--/#carousel-slider-->
+</div><!--/#about-slider-->
+</div><!--/#slider-->
+</div>
+
+</div>
+
+
+<div class="container bodydiv">
+<div id='prop_detial' class="">
+
+  <h4>For {{prop.disposal_type|title}} </h4>
+  <h4>Price: Ghs <strong>{{prop.price}}</strong></h4>
+  <h4>{{prop.bed}}Beds . {{prop.bath}} Baths . {{prop.property_type|title}}</h4>
+  <h4>Location:{{prop.location|title}}</h4><br>
+  <h4>Description</h4>
+<p>{{prop.description|linebreaks}}</p>
+</div>
+
+
+    <div class="row">
+      {% for image in prop.pictures.all  %}
+        <div class="col-md-3 col-sm-6">
+            <img class='thumbnail' src="{{image.image.url}} " width="300px" height="200px" alt={{image.image.url}}>
+        </div>
+
+      {% endfor %}
+    </div>
+    <div class="center">
+    <a  href= {% url 'realtor:viewing_request' pid=prop.id %} ><button class='btn btn-primary' type="button" name="button"> Reqest Viewing</button> </a>
+    </div>
+
+    {% if cord %}
+    <div id="mapdiv"></div>
+    {% endif %}
+</div>
+
+
+{% block script %}
+<!-- <script src={% static "js/jquery.js" %}></script>
+<script src={% static "js/leaflet.js" %}></script>
+  <script src={% static "js/leaflet-providers.js" %}></script> -->
+<script type="text/javascript">
+
+var map;
+var marker;
+var objBasemaps;
+var lyrOSM;
+var objOverlays;
+var lyrEsriImagery;
+var ctlLayers;
+map = L.map('mapdiv').setView([5.58, -0.39], 13);
+
+lyrOSM = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+marker = L.circleMarker([5.58, -0.39]).addTo(map)
+// .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
+//      .openPopup();
+
+lyrEsriImagery = L.tileLayer.provider('Esri.WorldImagery')
+
+objBasemaps = {
+    "Open Street Maps": lyrOSM,
+    "ESRI Imagery":lyrEsriImagery,
+    };
+
+ctlLayers = L.control.layers(objBasemaps, objOverlays).addTo(map);
+</script>
+{% endblock %}
+
+
+{% endblock %} #}

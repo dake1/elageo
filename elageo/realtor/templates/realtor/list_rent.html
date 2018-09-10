@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+  Elageo | Rentals
+{% endblock %}
+
+{% block body %}
+<br><br>
+<div class="container ">
+  <div class="container">
+    <form class='form-inline'  method="post">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <input class = "btn btn-primary" type="submit" name="" value="Search">
+      </form>
+  </div>
+
+{% for prop in rentals %}
+    <div class="prop_container col-md-4 col-sm-6">
+      <div class="prop_pix thumbnail">
+        {% for image in prop.pictures.all|slice:"0:1"  %}
+        <a href="{% url "realtor:rent_detail" prop.id %}">  <img class='prop_img img-responsive' src="{{image.image.url}} "  alt={{image.image.url}}></a>
+          {% endfor %}
+          <div class=" prop_details listingfontsize">
+
+          <table class='table'>
+            <tr>
+              <td><strong> {{prop.property_type|title}}</strong></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td><i class="fas fa-tag"></i><strong> {{prop.price}}</strong></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td><i class="fas fa-map-marker-alt"></i>  {{prop.location|title}}</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <table class="table">
+            <tr>
+              <td class='icon_detail'><i class="fas fa-bed"></i>  {{prop.bed}} </td>
+              <td class='icon_detail'><i class="fas fa-bath"></i> {{prop.bath}}</td>
+              <td class='icon_detail'><i class="far fa-square"></i> {{prop.size}}sqm</td>
+            </tr>
+            </table>
+        </table>
+          </div>
+          </div>
+      </div>
+      {% empty %}
+      <div class="text-center">
+          <h4>No recent listing</h4>
+      </div>
+{% endfor %}
+</div>
+
+<div class="container">
+    <div class="paginate ">
+      {% include "pagination.html" with page=rentals %}
+    </div>
+</div>
+
+{% endblock %}
+
+
+{% block script %}
+
+<script type="text/javascript">
+  var places = {{ places|safe}};
+  $( document ).ready(function() {
+    $( "#id_place" ).autocomplete({
+      source: places
+    });
+  });
+</script>
+{% endblock %}
